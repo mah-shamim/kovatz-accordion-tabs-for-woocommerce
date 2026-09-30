@@ -54,6 +54,13 @@ if (  class_exists( 'WC_Settings_Page' ) ) :
 						]
 					),
 					array(
+						'title' 				=> __( 'Use Theme Button Styles', 'accordion-tabs-for-woocommerce' ),
+						'desc' 				=> __( 'Use the active theme button styles for accordion headers and desktop tabs.', 'accordion-tabs-for-woocommerce' ),
+						'type' 				=> 'checkbox',
+						'id' 					=> 'kovatz_accordion[use_theme_button_styles]',
+						'default' 		=> 'yes'
+					),
+					array(
 						'title' 	  	=> __( 'Accordion Title Color', 'accordion-tabs-for-woocommerce' ),
 						'id' 		  		=> 'kovatz_accordion[title_color]',
 						'type' 		  	=> 'color',

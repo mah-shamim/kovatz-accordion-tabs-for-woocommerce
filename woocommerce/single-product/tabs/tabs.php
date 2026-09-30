@@ -32,13 +32,18 @@ $product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 if ( ! empty( $product_tabs ) ) :
     $product_tab_keys = array_keys( $product_tabs );
     $active_tab_key  = isset( $product_tabs['description'] ) ? 'description' : reset( $product_tab_keys );
+    $kovatz_accordion = get_option( 'kovatz_accordion', array() );
+    if ( ! is_array( $kovatz_accordion ) ) {
+        $kovatz_accordion = array();
+    }
+    $use_theme_button_styles = ( $kovatz_accordion['use_theme_button_styles'] ?? 'yes' ) === 'yes';
 ?>
 
 	<div class="woocommerce-tabs wc-tabs-wrapper">
 
         <div class="kovatz-desktop-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Product information', 'woocommerce' ); ?>">
             <?php foreach ( $product_tabs as $key => $product_tab ) : ?>
-                <button id="tab-<?php echo esc_attr( $key ); ?>" class="kovatz-tab-button <?php if ( $active_tab_key === $key ) echo 'kovatz-active'; ?>" type="button" role="tab" data-target="#flush-<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo ( $active_tab_key === $key ) ? 'true' : 'false'; ?>" aria-controls="flush-<?php echo esc_attr( $key ); ?>" tabindex="<?php echo ( $active_tab_key === $key ) ? '0' : '-1'; ?>">
+                <button id="tab-<?php echo esc_attr( $key ); ?>" class="button kovatz-tab-button <?php if ( $active_tab_key === $key ) echo 'kovatz-active'; ?>" type="button" role="tab" data-target="#flush-<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo ( $active_tab_key === $key ) ? 'true' : 'false'; ?>" aria-controls="flush-<?php echo esc_attr( $key ); ?>" tabindex="<?php echo ( $active_tab_key === $key ) ? '0' : '-1'; ?>">
                     <?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
                 </button>
             <?php endforeach; ?>
@@ -50,7 +55,7 @@ if ( ! empty( $product_tabs ) ) :
 
                 <div class="kovatz-accordion-item <?php if ( $active_tab_key === $key ) echo 'kovatz-active'; ?>">
                     <h2 class="kovatz-accordion-header <?php echo esc_attr( $key ); ?>_tab" id="accordion-title-<?php echo esc_attr( $key ); ?>">
-                        <button class="kovatz-accordion-button" type="button" data-target="#flush-<?php echo esc_attr( $key ); ?>" aria-expanded="<?php echo ( $active_tab_key === $key ) ? 'true' : 'false'; ?>" aria-controls="flush-<?php echo esc_attr( $key ); ?>" >
+                        <button class="button kovatz-accordion-button" type="button" data-target="#flush-<?php echo esc_attr( $key ); ?>" aria-expanded="<?php echo ( $active_tab_key === $key ) ? 'true' : 'false'; ?>" aria-controls="flush-<?php echo esc_attr( $key ); ?>" >
 							<?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
 						</button>
 					</h2>
@@ -105,14 +110,18 @@ if ( ! empty( $product_tabs ) ) :
             border-bottom-right-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['bottom']); ?>px;
             border-bottom-left-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['left']); ?>px;
         }
+        <?php if ( ! $use_theme_button_styles ) : ?>
         .kovatz-accordion-item:first-of-type .kovatz-accordion-header .kovatz-accordion-button {
             border-top-left-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['top']); ?>px;
             border-top-right-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['right']); ?>px;
         }
+        <?php endif; ?>
+        <?php if ( ! $use_theme_button_styles ) : ?>
         .kovatz-accordion-item:last-of-type:not(.kovatz-active) .kovatz-accordion-header .kovatz-accordion-button{
             border-bottom-right-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['bottom']); ?>px;
             border-bottom-left-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['left']); ?>px;
         }
+        <?php endif; ?>
         .kovatz-accordion-item:last-of-type .kovatz-accordion-body{
             border-bottom-right-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['bottom']); ?>px;
             border-bottom-left-radius: <?php echo esc_html($kovatz_accordion['body_border_radius']['left']); ?>px;
@@ -125,6 +134,7 @@ if ( ! empty( $product_tabs ) ) :
             border-style:solid;
             border-color: rgba(0, 0, 0, .125);
         }
+        <?php if ( ! $use_theme_button_styles ) : ?>
         .kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button{
             background-color: <?php echo esc_html(sanitize_hex_color($kovatz_accordion['bg'])); ?>;
             color:  <?php echo esc_html(sanitize_hex_color($kovatz_accordion['title_color'])); ?>;
@@ -132,6 +142,7 @@ if ( ! empty( $product_tabs ) ) :
                     <?php echo esc_html($kovatz_accordion['header_padding']['right']); ?>px
                     <?php echo esc_html($kovatz_accordion['header_padding']['bottom']); ?>px
                     <?php echo esc_html($kovatz_accordion['header_padding']['left']); ?>px;
+            border: none;
             border-radius:
                     <?php echo esc_html($kovatz_accordion['header_border_radius']['top']); ?>px
                     <?php echo esc_html($kovatz_accordion['header_border_radius']['right']); ?>px
@@ -152,6 +163,8 @@ if ( ! empty( $product_tabs ) ) :
                     <?php echo esc_html($kovatz_accordion['header_border_radius']['bottom']); ?>px
                     <?php echo esc_html($kovatz_accordion['header_border_radius']['left']); ?>px;
             font-size: <?php echo esc_html($kovatz_accordion['header_title_size']); ?>px;
+                border: 0;
+                border-bottom: 2px solid transparent;
         }
         .kovatz-desktop-tabs .kovatz-tab-button.kovatz-active,
         .kovatz-desktop-tabs .kovatz-tab-button:hover{
@@ -169,6 +182,7 @@ if ( ! empty( $product_tabs ) ) :
             background-color: <?php echo esc_html(sanitize_hex_color($kovatz_accordion['active_bg'])); ?>;
             color:  <?php echo esc_html(sanitize_hex_color($kovatz_accordion['title_active'])); ?>;
         }
+        <?php endif; ?>
 
         .kovatz-accordion-content{
             padding: <?php echo esc_html($kovatz_accordion['content_padding']); ?>px;

@@ -1,18 +1,9 @@
 .kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button {
-    background-color: transparent;
-    color: #444;
     cursor: pointer;
-    padding: 18px;
     width: 100%;
-    border: none;
     text-align: left;
-    outline: none;
-    transition: 0.4s;
     position: relative;
 }
-
-.kovatz-active.kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button,
-.kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button:hover {background-color: #ccc;}
 
 .kovatz-accordion-button:after {
     content: '';
@@ -56,22 +47,7 @@
     }
 
     .kovatz-tab-button {
-        background: transparent;
-        color: #444;
         cursor: pointer;
-        padding: 14px 18px;
-        border: 0;
-        border-bottom: 2px solid transparent;
-        font: inherit;
-    }
-
-    .kovatz-tab-button.kovatz-active {
-        border-bottom-color: #444;
-    }
-
-    .kovatz-tab-button:focus-visible {
-        outline: 2px solid currentColor;
-        outline-offset: -2px;
     }
 
     .kovatz-accordion-header {
