@@ -1,0 +1,95 @@
+.kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button {
+    background-color: transparent;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+    position: relative;
+}
+
+.kovatz-active.kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button,
+.kovatz-accordion-item .kovatz-accordion-header .kovatz-accordion-button:hover {background-color: #ccc;}
+
+.kovatz-accordion-button:after {
+    content: '';
+    background: url("../img/plus.svg") center center no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 15px;
+    height: 15px;
+}
+
+.kovatz-active .kovatz-accordion-button:after {
+    background: url("../img/minus.svg") center center no-repeat;
+    background-size: contain;
+}
+
+.kovatz-accordion-body{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.kovatz-accordion-content{padding: 18px;}
+
+.kovatz-accordion-item .kovatz-accordion-header{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.kovatz-desktop-tabs {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .kovatz-desktop-tabs {
+        display: flex;
+        gap: 4px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .kovatz-tab-button {
+        background: transparent;
+        color: #444;
+        cursor: pointer;
+        padding: 14px 18px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        font: inherit;
+    }
+
+    .kovatz-tab-button.kovatz-active {
+        border-bottom-color: #444;
+    }
+
+    .kovatz-tab-button:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: -2px;
+    }
+
+    .kovatz-accordion-header {
+        display: none;
+    }
+
+    .kovatz-accordion-item {
+        border: 0;
+    }
+
+    .kovatz-accordion-body {
+        display: none;
+        max-height: none;
+        overflow: visible;
+        transition: none;
+    }
+
+    .kovatz-accordion-item.kovatz-active .kovatz-accordion-body {
+        display: block;
+    }
+}

@@ -1,0 +1,50 @@
+.kovatz-control-dimensions {
+    display: flex;
+    max-width:280px;
+    margin: 0;
+}
+.woocommerce table.form-table .kovatz-control-dimensions input[type=number] {
+    width: 70px;
+}
+.kovatz-control-type-dimensions li {
+    flex: 1;
+    transition: flex-grow .3s ease-in-out;
+}
+.kovatz-control-type-dimensions li .first-child  {
+    border-inline-start: 1px solid #8c8f94!important;
+}
+.kovatz-control-dimension-label {
+    color: #818a96;
+    display: block;
+    text-align: center;
+    font-size: 9px;
+    padding-block-start: 5px;
+}
+
+.kovatz-control-type-dimensions li input[type=number] {
+    border-inline-start: none;
+    border-radius: 0;
+    padding: 3px;
+}
+.kovatz-control-type-dimensions li .kovatz-link-dimensions, .kovatz-control-type-dimensions li input[type=number] {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 27px;
+}
+.kovatz-link{
+    display: flex;
+    align-items: center;
+}
+.kovatz-link input{margin-left:10px;}
+.wc-wp-version-gte-53 .woocommerce table.form-table .colorpickpreview{
+    border: none;
+}
+.kovatz-control-type-dimensions input::-webkit-outer-spin-button,
+.kovatz-control-type-dimensions input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.kovatz-control-type-dimensions input[type=number] {
+    -moz-appearance: textfield;
+}
